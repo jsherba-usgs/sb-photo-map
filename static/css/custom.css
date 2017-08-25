@@ -1,0 +1,215 @@
+/* ================INSTRUCTIONS=================*/ 
+/* By changing the classes below, you can add your own custom styles for various areas of the header. In order for your changes to work though, you MUST include a reference in your HTML pages to both the common CSS file and custom CSS file in that order.
+
+Instructions are provided below for customizing these classes.
+
+/* ================BANNER=======================*/  
+/* TO DISPLAY A CUSTOM BANNER IMAGE: 
+If you want to display a custom banner, change the "background: url" to point to a local banner, or external, image location.
+
+TO DISPLAY A CUSTOM BANNER COLOR (NO IMAGE): 
+If you would rather display a color instead of a banner image, change the "background: url" portion to point to "" and set the background color (#006633) to whatever color you wish to display.
+NOTE: You can use either hexadecimal color codes (i.e. - #006633, #063) or HTML color names (i.e. - "black"). 
+background: #000000 url("../images/SFBayBanner.jpg") 178px 0px no-repeat;*/ 
+#usgscolorband { 
+	background: #000000 url("https://s3-us-west-2.amazonaws.com/photoapptest/images/blue_black4.jpg") 60px 0px no-repeat; 
+} 
+
+
+/* ================SITE TITLE===================*/ 
+/* TO DISPLAY A CUSTOM SITE TITLE BAR: 
+The #usgstitle class is specific to the colored site title bar that lies beneath the USGS identifier. To change the color of this bar, set the "background-color" attribute below to the color you wish to display and change the "color" attribute to set the text color.
+NOTE: You can use either hexadecimal color codes (i.e. - #000000) or HTML color names (i.e. - "black"). */ 
+#usgstitle { 
+	background-color: #355234; 
+	clear: both; 
+	width: 100%; 
+	border-bottom: 0; 
+	border-top: 1px solid #ffffff; 
+	font: 14px Verdana, Arial, Helvetica, sans-serif; 
+	color: #ffffff; 
+	height: 30px;
+} 
+#usgstitle p { 
+	font: bold 1.2em Verdana, Arial, Helvetica, sans-serif; 
+	padding: 5px; 
+	margin: 0px; 
+	float: left;
+} 
+#usgstitle label {
+	font-size: small;
+	font-weight: bold;
+}
+#usgstitle form {
+	float: right;
+	padding: 4.5px;
+	margin: 0px;
+}
+#usgstitle form input {
+	margin: 0px;
+}
+#usgstitle #btnG {
+	font-size: small !important;
+	font-size: x-small;
+}
+/* =============STANDARD CONTENT===============*/ 
+/* TO CHANGE THE TEXT SIZE OF THE CONTENT:
+By default, USGS has set the font size to "small" in order to provide a consistent size for content across all pages. If you would prefer not to have a pre-defined font size for your pages, change the "font-size" attributes below to "font-size: 100%;". */
+body {
+	background-color:#FFF;
+	font-size: small;
+	margin: 1.5px 4px 0 4px;
+	margin-left:auto;
+	margin-right:auto;
+	/*width:1160px;*/
+}
+th, td {
+	font-size: small;
+	
+}
+img {margin-right: 4px}
+		/* =============================================================================*/
+		/* === OLD TEMPLATES Version: FY 2006 (Deprecated but supported until further notice. ===*/
+		/* =====These styles are only here to support older templates. DO NOT EDIT =====*/
+			.banner { 
+					background: url("http://www.usgs.gov/images/headers/hazards.jpg") 178px 0px no-repeat; 
+			} 
+			DIV.bannerColorBand, DIV.banner { 
+					background-color: #006633; 
+			} 
+			Div.siteTitle, #pTitle { 
+				 background-color: #006633; 
+				 color: #ffffff; 
+			} 
+		/* === End OLD TEMPLATES: FY 2006 ===*/
+		/* ===============================================================*/
+
+
+.mapTable{
+  background-color: red;  
+  padding: 20px;
+}
+.mapTable img {
+  border: 10px solid red;
+}
+
+.mapTable td {	
+  text-align: left;	
+   padding : 0 20px 0 20px;  
+}
+.mapTable a:link { 
+background-color:red;	
+color: blue;
+text-decoration:underline;
+    
+}
+.mapTable  a:visited { 
+background-color:red;	
+color: blue;
+text-decoration:underline;
+}
+
+
+.mapTable  a:hover { 
+background-color:red;	
+color: blue;
+text-decoration:underline;
+font-weight:bold;
+}
+
+
+.mapImage {
+	border: 10px solid red;
+}
+
+.sidebar li
+{
+  list-style-type: none;
+}
+
+
+.MenuBarVertical a, .MenuBarVertical a:active, .MenuBarVertical a:visited
+{
+background-color:  #EEE;
+}
+.MenuBarVertical a:hover
+{
+background-color: red;
+font-weight: bold;
+}
+#sidebar1
+{
+  min-height:620px;
+}
+
+#sidebar1 a:hover
+{
+font-weight: bold;
+}
+
+#sidebar1 ul 
+{
+
+ font-size:14px;
+ font-weight: bold;
+
+}
+#sidebar1 p
+{
+ font-size:14px;
+}
+
+.subItem li 
+{
+ font-size:14px;
+ font-weight: normal;
+}
+
+h4 
+{
+text-align:center;
+}
+
+#nav
+{
+	clear:both;
+	padding-top: 1px;
+	padding-bottom: 2px;
+	background-color: black;
+	height: 30px;
+	width: auto;
+}
+
+ hr { color: #006633;
+		      background-color: #006633;}
+.contact { color : #006f41;}
+.centered { text-align : center;}		
+.caption { font-style : italic;
+			padding : 20px 10px 5px 10px;}
+			
+.headbar {	
+	color: #d1d2b8;	
+	font-size: 8pt;	
+	line-height: 10pt;	
+	position: relative;	
+	top: 21px;	
+	left: 10px;	
+	margin-top: 0px;
+	margin-bottom: 0px;
+	}
+			
+			
+@media print{
+
+
+#nav{
+  display: none;
+}
+#MenuBar2{
+  display: none;
+}
+.noPrint{
+  display: none;
+}
+			
+}

@@ -1,0 +1,239 @@
+html, body {
+    height: 100%;
+	margin-top: 0px;
+	}
+	
+	.btn-custom {
+  background-color: hsl(124, 43%, 41%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3b9541", endColorstr="#3b9541");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#3b9541), to(#3b9541));
+  background-image: -moz-linear-gradient(top, #3b9541, #3b9541);
+  background-image: -ms-linear-gradient(top, #3b9541, #3b9541);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #3b9541), color-stop(100%, #3b9541));
+  background-image: -webkit-linear-gradient(top, #3b9541, #3b9541);
+  background-image: -o-linear-gradient(top, #3b9541, #3b9541);
+  background-image: linear-gradient(#3b9541, #3b9541);
+  border-color: #3b9541 #3b9541 hsl(124, 43%, 41%);
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.00);
+  -webkit-font-smoothing: antialiased;
+}
+.row{
+    margin-right: 0px;
+    margin-left:  0px;
+    }
+	
+	#titlescript{
+	color: #525252;
+	margin-top: 5px;
+    margin-bottom: 10px;
+    }
+	.aboutbutton{
+	border-left: 2px solid grey;
+    padding-left: 20px;
+	}
+	.btn .glyphicon {
+	margin-right: 4px;
+	vertical-align: middle;
+	}
+	.container-fluid{
+	height:100%;
+	margin: 0;
+    padding: 0px 0px 125px 0px;
+	}
+	#startdate{
+	width:80px;
+	padding-right:0px;
+	margin-right: 0px
+	}
+	
+	#enddate{
+	width: 80px
+	}
+	
+	#usgscolorband{
+	margin-bottom: 10px;
+	padding-right: 0px;
+	overflow:hidden;
+	}
+	#section1{
+	height:100%
+	}
+	#section2{
+	height:100%;
+	
+	}
+	#mapdiv{
+	height:100%;
+    padding-right: 0px;
+    padding-left: 0px; 
+	
+	}
+/*	.learnmoretab{
+	position:absolute;
+	bottom:12px;
+	right: 10px;
+	
+	}*/
+	.downloadButton{
+	position:absolute;
+	bottom:12px;
+	left: 25px;
+	}
+	
+	#controldiv{
+	width:100px;
+	height: 80px;
+	position:absolute;
+	bottom:100px;
+	left: 100px;
+	background-color:white;
+	/*border-style: solid;
+    border-width: 1px;
+	border-color: grey;*/
+    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.2);
+
+	}
+	
+	
+	
+	
+	#map{
+	height: 100%;
+	width:100%;
+	/*height: 700px;*/
+
+	 
+	}
+	.aboutbutton{
+	margin-right: 15px
+	}
+	
+	
+	
+	.bottom {
+    position: absolute;
+    bottom: 0;
+    margin-right: 0;
+	}
+	
+	h4 {
+	text-align: left;
+	}
+
+	.form-multiline label,
+	.form-multiline .form-control {
+		margin-right: 15px;
+	}
+	
+	.leaflet-marker-photo { 
+	border: 2px solid #fff; 
+	box-shadow: 3px 3px 10px #888;
+}	
+    .input-sm{
+	height: 35px
+	
+	}
+.leaflet-marker-photo div { 
+    width: 100%;  
+    height: 100%;
+    background-size: cover;    
+    background-position: center center;
+    background-repeat: no-repeat;
+}	
+
+.leaflet-marker-photo b {
+	position: absolute;
+	top: -7px;
+	right: -11px;
+	color: #555;
+	background-color: #fff;
+	border-radius: 8px;
+	height: 12px;
+	min-width: 12px;
+	line-height: 12px;
+	text-align: center;
+	padding: 3px;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+    box-sizing: content-box; /* This should be specified to prevent the confliction with bootstrap's scaffolding.less which makes border-box as the default for box-sizing. */
+}
+.leaflet-popup-photo a.leaflet-popup-close-button {
+	top: -13px;
+	right: -13px;
+	background-color: #fff;
+	padding: 5px;
+	border-radius: 12px;
+	width: 15px;
+	height: 15px;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	color: #555;
+    box-sizing: content-box; /* This should be specified to prevent the confliction with bootstrap's scaffolding.less which makes border-box as the default for box-sizing. */
+}
+
+	#taginput{
+	margin-right: 0px;
+	}
+	#title{
+	padding-left: 10px;
+	margin-bottom: 0px;
+	}
+	.form-multiline .form-group {
+	margin-bottom: 10px;
+	margin-right: 16px;
+	}
+	.info h4 {
+			margin: 0 0 5px;
+			color: #777;
+		}
+	.info {
+			padding: 6px 8px;
+			font: 14px/16px Arial, Helvetica, sans-serif;
+			background: white;
+			background: rgba(255,255,255,1);
+			box-shadow: 0 0 15px rgba(0,0,0,0.2);
+			
+		}
+		img {
+		 margin-right: 0px; 
+		}
+	.legend{
+	
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	
+	}
+	#searchform{
+    background-color: #f0f0f0;
+   }
+   #usgsfootertext {
+	  padding: 20px;
+	}
+	 #footer {
+    position : relative;
+    padding-right:0px;
+    padding-left:0px;
+    height : 40px;
+   
+  }
+  @media only screen and (max-width: 768px) {
+	 .aboutbutton{
+        text-align: left;
+		border-left:0px;
+		padding-left:0px;
+    }
+    .searchbuttongroup {
+        text-align: left;
+    }
+	.leaflet-popup-content{
+		
+		width: 200px !important;
+	}
+	#NLCD_Legend{
+		
+		width:0px 
+	}
+	.modal{
+		overflow: auto !important;
+	}   
+}
+
