@@ -4,14 +4,14 @@ A web application for viewing field photos managed within USGS ScienceBase.
 
 ## Getting Started
 
-Create virtual environment  
+1. Create virtual environment  
 virtualenv env  
-source activate   
+env/bin/source activate   
   
-Install requirements  
+2. Install requirements  
 pip install -r requirements.txt  
   
-Start flask  
+3. Start app
 export FLASK_APP=index.py  
 (windows) set FLASK_APP=index.py  
 flask run  

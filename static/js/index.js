@@ -10,6 +10,7 @@
         'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
             attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
         });
+    
     //Initialize leaflet map
 	
     var map = L.map('map', {
@@ -39,11 +40,16 @@
             transparent: true,
 			attribution: "USGS, TNM, Imagery Only"
         });
+   /* var geologic_imagery = L.mapbox.tileLayer('rclark.d2f57dc3', {
+      accessToken: 'pk.eyJ1IjoicmNsYXJrIiwiYSI6IlQwaklqazAifQ.OWuTG3XPSdvoq_zGL0-1tA',
+      attribution: '<a href="http://geomaps.wr.usgs.gov/arizona/">George Billingsley et al.</a> <a href="https://www.mapbox.com/about/maps/">© Mapbox © OpenStreetMap</a> and Ryan Clark, 2014'
+    })*/
 		
     var baseMaps = {
         "Streets": OpenStreetMap_Mapnik,
         "Imagery": Esri_WorldImagery,
 		"USGS Imagery": USGSImageryLayer
+        //"Geology":geologic_imagery
     };
 	
     //Define overlay layers (nlcd and ecoregions)
