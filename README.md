@@ -4,17 +4,17 @@ A web application for viewing field photos managed within USGS ScienceBase.
 
 ## Getting Started
 
-Create virtual environment
-virtualenv env
-source activate 
-
-Install requirements
-pip install -r requirements.txt
-
-Start flask
-export FLASK_APP=index.py
-(windows) set FLASK_APP=index.py
-flask run
+Create virtual environment  
+virtualenv env  
+source activate   
+  
+Install requirements  
+pip install -r requirements.txt  
+  
+Start flask  
+export FLASK_APP=index.py  
+(windows) set FLASK_APP=index.py  
+flask run  
 
 ## Deployment
 
@@ -22,9 +22,8 @@ Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Flask](http://flask.pocoo.org/) - The web framework used
+* [Webpack](https://webpack.github.io/) - Dependency Management
 
 
 ## Authors
