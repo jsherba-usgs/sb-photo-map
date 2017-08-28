@@ -21,6 +21,7 @@ sb = pysb.SbSession()
 def home():
     #query parent item for dataset metadata
     project_item = sb.get_item(project_parent_id)
+   
     title = project_item['title']	
     
     user_instructions_item = sb.get_item(user_instructions_parent_id)
