@@ -5,11 +5,11 @@ from datetime import datetime
 from flask import Flask, url_for, render_template, jsonify, request, json
 app = Flask(__name__)
 
-photo_parent_id = "599f87c6e4b038630d00ff7f"
+photo_parent_id = "59a5e8b9e4b0fd9b77cd0884"
 project_parent_id = "597e9378e4b0a38ca2774a30"
 user_instructions_parent_id ="599f85f7e4b038630d00ff7c"
 about_photos_parent_id = "599f8ae6e4b038630d00ff8b"
-max_projects = "25"
+max_projects = "500"
 sb = pysb.SbSession()
 # Get a private item.  Need to log in first.
 
@@ -35,23 +35,28 @@ def home():
     'parentId': photo_parent_id,
     'fields': ['tags, dates']
     })
-    
+   
     regions = []
     geology = []
     dates = []
     for item in all_items['items']:
         try:
             for date in item['dates']:
-                
-                if date['type']=='Acquisition':
+                if date['type']=='Aquisition':
+                   
                     dates.append(date['dateString'])
-                
+                else:
+                    continue
             for tag in item['tags']:
                
-                if tag['type']=='Place':
+                if tag['type']=='Region':
                     regions.append(tag['name'])
+                else:
+                    continue
                 if tag['type']=='Geology':
                     geology.append(tag['name'])
+                else:
+                    continue
         except KeyError:
             continue
                 
@@ -70,6 +75,7 @@ def allPhotos():
     'parentId': photo_parent_id,
     'fields':['title, summary, files, previewImage, tags, spatial, dates']
     })
+    print(items)
     return jsonify(items);
 
 @app.route('/searchPhotos', methods=['POST'])
@@ -91,7 +97,7 @@ def searchPhotos():
         reg_param = 'tags='+reg
         filter_params.append(reg_param)
         
-    date_range = 'dateRange={"start":'+start_date+',"end":'+end_date+',"dateType":"Acquisition"}'
+    date_range = 'dateRange={"start":'+start_date+',"end":'+end_date+',"dateType":"Aquisition"}'
     filter_params.append(date_range)
     
     
