@@ -1,4 +1,6 @@
  $(document).ready(function() {
+    $("#sidebar").toggleClass("collapsed");
+$("#content").toggleClass("col-md-12 col-md-9");
 
   var sbData = 0
     //Set max bounds and define map
@@ -12,7 +14,6 @@
         });
     
     //Initialize leaflet map
-	
     var map = L.map('map', {
       //  center: [39.8282, -98.5795],
       //  zoom: 5,
@@ -24,9 +25,6 @@
 	 
 	map.spin(true)
     
-
-
-
 	//Define basemaps, add world imagery base map to map 
     var OpenStreetMap_Mapnik = L.tileLayer(
         'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -71,8 +69,19 @@
         };
 		
         //Add basemaps and overlay layers to map
-        L.control.layers(baseMaps, overlayMaps).addTo(map);
-        $('[data-toggle="popover"]').popover({
+        var control = L.control.layers(baseMaps, overlayMaps)
+        control.addTo(map);
+        var htmlObject = control.getContainer();
+
+        var a = document.getElementById('basemaps-panel');
+
+        function setParent(el, newParent)
+         {
+            newParent.appendChild(el);
+         }
+         setParent(htmlObject, a);
+
+       $('[data-toggle="popover"]').popover({
             placement: 'top'
         });
    
@@ -80,7 +89,7 @@
 	
 	//Define photo cluster       
     var photoLayer = L.photo.cluster({
-        maxClusterRadius: 60,
+        maxClusterRadius: 45,
         chunkedLoading: true
     }).on('click', function(evt) {
         var photo = evt.layer.photo,
@@ -187,9 +196,6 @@
         
             var photos = [];
         	
-            
-           console.log(sbData)
-           console.log(sbData.items)
                      
            for (var i = 0; i < sbData.items.length; i++) {
                 var item = sbData.items[i];
@@ -421,6 +427,15 @@
             this.removeControl(info);
         }
     });
+
+    $(".toggle-sidebar").click(function (map) {
+  
+                $("#sidebar").toggleClass("collapsed");
+                $("#content").toggleClass("col-md-12 col-md-9");
+                map.invalidateSize()
+                return false;
+            });
+    $('.collapse').collapse()
          
     
 });   

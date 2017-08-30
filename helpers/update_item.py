@@ -7,7 +7,7 @@ from datetime import datetime
 sb = pysb.SbSession()
 # Get a private item.  Need to log in first.
 sb.login('jsherba@usgs.gov', 'CamelliaBloom0601@')
-
+time.sleep(2)
 def listPhotos(photo_dir):
     # Define the directory we will work from. Obtain a list of files.
     tif_files = []
@@ -145,9 +145,10 @@ def addItemExtents(path_to_csv, photo_parent_id):
 
     #get ids of all photo items
     photo_items_ids = sb.get_child_ids(photo_parent_id)
-
+    
     #for each photo item update metadata with data from metadata_dic
     for photo_id in photo_items_ids:
+        time.sleep(1)
         photo_item = sb.get_item(photo_id)
 
         #extract file name from item
@@ -158,6 +159,7 @@ def addItemExtents(path_to_csv, photo_parent_id):
         print("Updating item extent for photo "+file_name)
         print "\n"
         #Add point from bounding box
+        print(metadata_dic[file_name]["Title (SB item name)"])
         point = [float(metadata_dic[file_name]["WestBC"]),float(metadata_dic[file_name]["NorthBC"])]
         point_json = {
           "type": "Feature",
@@ -171,7 +173,7 @@ def addItemExtents(path_to_csv, photo_parent_id):
         }
         
         sb.add_extent(photo_item['id'], point_json)
-
+        
     print "All item extents updated successfully."   
 
 
@@ -181,6 +183,6 @@ path_to_csv = r"/home/jsherba-pr/Projects/photo_app/helpers/EasternGrandCanyon_p
 
 #photos = listPhotos(photo_dir)
 #createItems(photos, photo_parent_id)
-populateItems(path_to_csv, photo_parent_id)  
-#addItemExtents(path_to_csv, photo_parent_id) 
+#populateItems(path_to_csv, photo_parent_id)  
+addItemExtents(path_to_csv, photo_parent_id) 
 #deleteChildItems(photo_parent_id)

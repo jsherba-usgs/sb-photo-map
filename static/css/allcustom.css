@@ -28,9 +28,9 @@ html, body {
 	color: #525252;
 	margin-top: 5px;
     margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
     }
 	.aboutbutton{
-	border-left: 2px solid grey;
     padding-left: 20px;
 	}
 	.btn .glyphicon {
@@ -43,14 +43,11 @@ html, body {
     padding: 0px 0px 125px 0px;
 	}
 	#startdate{
-	width:80px;
 	padding-right:0px;
 	margin-right: 0px
 	}
 	
-	#enddate{
-	width: 80px
-	}
+	
 	
 	#usgscolorband{
 	margin-bottom: 10px;
@@ -213,6 +210,7 @@ html, body {
     padding-right:0px;
     padding-left:0px;
     height : 40px;
+    top: -125px;
    
   }
   @media only screen and (max-width: 768px) {
@@ -237,3 +235,43 @@ html, body {
 	}   
 }
 
+#sidebar {
+  /* for the animation */
+  transition: margin 0.3s ease;
+}
+
+.sidebar.collapsed {
+  /* hide it for small displays*/
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .sidebar.collapsed {
+    display: block;
+    /* same width as sidebar */
+    margin-left: -25%;
+  }
+}
+#row-main {
+  /* necessary to hide collapsed sidebar */
+  overflow-x: hidden;
+  height:100%;
+}
+
+#content {
+  /* for the animation */
+  transition: width 0.3s ease;
+}
+.panel-body{
+	background-color: #f0f0f0;
+}
+.input-group{
+	width:100%;
+}
+.form-group-100{
+	width:100%;
+}
+
+.bootstrap-select{
+	width:100%;
+}

@@ -45,18 +45,15 @@ def home():
                 if date['type']=='Aquisition':
                    
                     dates.append(date['dateString'])
-                else:
-                    continue
+                
             for tag in item['tags']:
                
                 if tag['type']=='Region':
                     regions.append(tag['name'])
-                else:
-                    continue
+                
                 if tag['type']=='Geology':
                     geology.append(tag['name'])
-                else:
-                    continue
+                
         except KeyError:
             continue
                 
@@ -73,9 +70,10 @@ def home():
 def allPhotos():
     items = sb.find_items({
     'parentId': photo_parent_id,
-    'fields':['title, summary, files, previewImage, tags, spatial, dates']
+    'fields':['title, summary, files, previewImage, tags, spatial, dates'],
+    'max': "500"
     })
-    print(items)
+    
     return jsonify(items);
 
 @app.route('/searchPhotos', methods=['POST'])
@@ -85,8 +83,7 @@ def searchPhotos():
     start_date = request.form['startdate']
     end_date = request.form['enddate']
     string_query = request.form['stringquery']
-    
-    print(string_query)
+
     
     filter_params = []
     if geo != "all":
@@ -106,7 +103,7 @@ def searchPhotos():
         'q': string_query,
         'filter': filter_params,
         #'lq': '(tags.name'+reg+') AND tags.name(+'+geo+'))', # AND tags.name(+water)) OR tags.name(+WY)',
-        #'max': "25",
+        'max': "500",
         'fields':['title, summary, files, previewImage, tags, spatial, dates']
     })
     return jsonify(items);
