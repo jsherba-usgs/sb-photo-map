@@ -14,7 +14,8 @@ sb = pysb.SbSession()
 # Get a private item.  Need to log in first.
 
 
-#sb.login('jsherba@usgs.gov', 'CamelliaBloom0601@')
+#username = raw_input("Username:  ")
+#sb.loginc(str(username))
 
 
 @app.route('/')	
