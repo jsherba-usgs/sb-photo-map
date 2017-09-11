@@ -1,0 +1,319 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Photo Map</title>
+   <meta charset="utf-8">
+   <meta name ="title" content="Field Photo Map">
+   <meta name="description" content="Field Photo Map">
+   <meta name="keywords" content="Department of the Interior,USGS, U.S. Geological Survey, environment, science, USGS Library, maps, map, WGSC, Western Geographic Science Center,
+    Field Photos, Land Cover Photos, Jason Sherba">
+   <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/leaflet.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/common.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/custom.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/modules.css') }}" rel="stylesheet" media="screen">
+    <link href="{{ url_for('static', filename='css/allcustom.css') }}" rel="stylesheet" media="screen">	
+</head>
+ <body data-spy="scroll" data-target="#myScrollspy" id="pagetop">
+	<!-- Header -->
+   <div class="col-md-12" id="usgscolorband">
+        <div id="usgsbanner">
+            <div id="usgsidentifier">
+                <a href="http://www.usgs.gov/"><img alt=
+                "USGS - science for a changing world" height="72" src=
+                "../static/img/header_graphic_usgsIdentifier_white.jpg" title=
+                "U.S. Geological Survey Home Page" width="178"></a>
+            </div>
+
+            <div id="usgsccsabox">
+                <div id="usgsccsa">
+                    <br>
+                    <a href="http://www.usgs.gov/">USGS Home</a><br>
+                    <a href="http://www.usgs.gov/ask/">Contact USGS</a><br>
+                    <a href="http://search.usgs.gov/">Search USGS</a><br>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  <form class="form form-inline form-multiline text-right" id="searchform"
+                       name="searchform">
+       <div class="form-group pull-left text-left" id="title">
+           <h3 id="titlescript">{{title}}</h3>
+       </div>
+        <div class="form-group aboutbutton dropdown">
+           <button class="btn btn-custom dropdown-toggle" data-toggle=
+           "dropdown" type="button">About <span class="caret"></span></button>
+             <ul class="dropdown-menu dropdown-menu-right" id="myScrollspy"
+           style="z-index: 9999">
+               <li>
+                   <a data-target="#myModal" data-toggle="modal">How to use
+                   viewer</a>
+               </li>
+                 <li class="divider"></li>
+                 <li>
+                   <a data-target="#modalAboutPhotos" data-toggle="modal">About the collection</a>
+                   
+               </li>
+           </ul>
+       </div>
+   </form>
+    
+   
+    <div class="modal fade" id="myModal" tabindex="-1">
+        <div class="modal-dialog" style="width: 1000px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type=
+                    "button">×</button>
+
+                    <h3 class="modal-title">How to use the viewer</h3>
+                </div>
+
+                <div class="modal-body">
+                
+     
+                {{user_instructions|safe}}
+                
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type=
+                    "button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="modal fade" id="modalAboutPhotos" tabindex="-1">
+        <div class="modal-dialog" style="width: 1000px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal" type=
+                    "button">×</button>
+
+                    <h3 class="modal-title">About the collection</h3>
+                </div>
+
+                <div class="modal-body">
+                
+                {{about_photos|safe}}
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal" type=
+                    "button">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- Map and description -->  
+    <div class="row" id="row-main">
+            <div class="container-fluid col-md-3 sidebar" id="sidebar">
+                
+                    <h3 id="titlescript">{{title}}</h3>
+                
+               <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Basemaps
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body" id="basemaps-panel">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                      <h4 class="panel-title">
+                        <a class="collapsed-acc" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Search
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                      <div class="panel-body">
+                            <!-- Search bar -->
+                        <form class="form form-multiline text-left" id="searchform"
+                        name="searchform">
+
+                            <div class="form-group form-group-100 text-left">
+                                
+                                <div class="input-group">
+                                    <input class="form-control" id="taginput" placeholder=
+                                    "Search tag..." type="text">
+                                   <!--  <span class="input-group-btn"> <button class=
+                                    "btn btn-default search" type="button">Go!</button>-->
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group text-left">
+                               
+
+                                <div class="input-daterange input-group picker" id="datepicker">
+                                    <input class="input-sm form-control" id="startdate" name=
+                                    "start" type="text" value="{{date_min}}"> <span class=
+                                    "input-group-addon" style=
+                                "padding-top: 6px;
+                        padding-right: 12px; padding-bottom: 6px;
+                        padding-left: 12px;">to</span> <input class=
+                                    "input-sm form-control" id="enddate" name="end" type="text"
+                                    value="{{date_max}}">
+                                </div>
+                            </div>
+                             <div class="form-group text-left">
+                               
+
+                                <div class="buttonwidth">
+                                    <select class="selectpicker geo" name="selValue">
+                                        <option value="all" style="width: 1000px">
+                                            All geology
+                                        </option>
+                                            {% for geo in geology %}
+                                            <option value="{{ geo }}">
+                                            {{ geo }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group text-left">
+                               
+
+                                <div class="buttonwidth">
+                                    <select class="selectpicker region" name="selValue">
+                                        <option value="all">
+                                            All regions
+                                        </option>
+                                            {% for region in regions %}
+                                            <option value="{{ region }}">
+                                            {{ region }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group searchbuttongroup">
+                                <button class="btn btn-custom" id="resetsearch" type=
+                                "button">Reset</button>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                      <h4 class="panel-title">
+                        <a class="collapsed-acc" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Cart
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                      <div class="panel-body">
+                       testtest
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="container-fluid col-md-9" id="content">
+            <div class="row" id="section1">
+                <div class="col-md-12" id="mapdiv">
+                    
+                    <div class="leaflet-container leaflet-fade-anim" id="map">
+                    </div>
+
+                    <div id="event" class="hidden-xs btn-group downloadButton">
+                        <div class="btn-group" role="group" aria-label="Controls">
+                            <button type="button" class="btn btn-default toggle-sidebar">Toggle sidebar</button>
+                        </div>
+                        <a class="btn btn-custom downloadphotos" data-content=
+                        "Download photos from current extent (limit: 100 photos)"
+                        data-toggle="popover" data-trigger="hover" href=
+                        "#"><span class=
+                        "glyphicon glyphicon-circle-arrow-down"></span> Download
+                        photos</a>
+                        
+                    </div>
+                    
+                </div>
+            </div>      
+         </div>
+            
+   </div>
+
+       
+			<!-- Footer -->
+    <div class="col-md-12" id="footer">
+        <p id="usgsfooterbar"><a href=
+        "http://www.usgs.gov/laws/accessibility.html" title=
+        "Accessibility Policy (Section 508)">Accessibility</a> <a href=
+        "http://www.usgs.gov/foia/" title=
+        "Freedom of Information Act">FOIA</a> <a href=
+        "http://www.usgs.gov/laws/privacy.html" title=
+        "Privacy policies of the U.S. Geological Survey.">Privacy</a>
+        <a href="http://www.usgs.gov/laws/policies_notices.html" title=
+        "Policies and notices that govern information posted on USGS Web sites.">
+        Policies and Notices</a></p>
+
+        <p id="usgsfootertext"><a href=
+        "http://www.takepride.gov/"><img alt=
+        "Take Pride in America logo" height="58" src=
+        "../static/img/footer_graphic_takePride.jpg" title=
+        "Take Pride in America Home Page" width="60"></a> <a href=
+        "http://usa.gov/"><img alt="USA.gov logo" height="26" src=
+        "../static/img/footer_graphic_usagov.jpg" title=
+        "USAGov: Government Made Easy" width="90"></a> <a href=
+        "http://www.doi.gov/">U.S. Department of the Interior</a>
+        <a href="http://www.usgs.gov/">U.S. Geological Survey</a><br>
+        URL: http://<!--#echo var="SERVER_NAME"--> 
+        <!--#echo var="DOCUMENT_URI"--><br>
+        Page Contact Information: <a href="mailto:" target="_blank">WRG
+        Web Team</a><br>
+        Page Last Modified: <!--#echo var="LAST_MODIFIED" --> (
+        <!--#echo var="modifier" -->)</p>
+    </div>
+        
+    
+     <script type="text/javascript">
+            var date_min = '{{ date_min }}'
+            var date_max = '{{ date_max }}'
+           
+    </script>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	 <script src="{{ url_for('static', filename='js/leaflet.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/leaflet.markercluster.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+	 <script src="{{ url_for('static', filename='js/bootstrap-select.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/bootstrap-slider.min.js') }}"></script>
+	 <script src="{{ url_for('static', filename='js/Leaflet.Photo.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/leaflet.defaultextent.js') }}"></script>
+	 <script src="{{ url_for('static', filename='js/jszip.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/jszip-utils.min.js') }}"></script>
+	 <script src="{{ url_for('static', filename='js/bootstrap-datepicker.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/FileSaver.min.js') }}"></script>
+	 <script src="{{ url_for('static', filename='js/easy-button.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/FileSaver.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/spin.min.js') }}"></script>
+	 <script src="{{ url_for('static', filename='js/leaflet.spin.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+     
+   
+	
+    
+	
+   
+</body>
+</html>    
+	
+

@@ -1,7 +1,7 @@
  $(document).ready(function() {
     $("#sidebar").toggleClass("collapsed");
-$("#content").toggleClass("col-md-12 col-md-9");
-
+    $("#content").toggleClass("col-md-12 col-md-9");
+  
   var sbData = 0
     //Set max bounds and define map
   var maxBounds = [
@@ -14,7 +14,7 @@ $("#content").toggleClass("col-md-12 col-md-9");
         });
     
     //Initialize leaflet map
-    var map = L.map('map', {
+    window.map = L.map('map', {
       //  center: [39.8282, -98.5795],
       //  zoom: 5,
     	//minZoom: 3,
@@ -69,7 +69,7 @@ $("#content").toggleClass("col-md-12 col-md-9");
         };
 		
         //Add basemaps and overlay layers to map
-        var control = L.control.layers(baseMaps, overlayMaps)
+        var control = L.control.layers(baseMaps, overlayMaps, {collapsed:false})
         control.addTo(map);
         var htmlObject = control.getContainer();
 
@@ -108,7 +108,9 @@ $("#content").toggleClass("col-md-12 col-md-9");
 	
 	// attributes2()
 	//Prepare photo attributes for clustering
+
   function addAllPhotos() {
+          
 	$.when($.ajax({
     			url: '/allPhotos',
     			data: $('form').serialize(),
@@ -127,9 +129,10 @@ $("#content").toggleClass("col-md-12 col-md-9");
 	
 
     var photos = [];
-             
+   window.sbDataAll  = sbData.items   
+    
    for (var i = 0; i < sbData.items.length; i++) {
-        var item = sbData.items[i];
+        item = sbData.items[i];
        
         photos.push({
             lat: parseFloat(item['spatial']['boundingBox']['minY']),
@@ -144,7 +147,8 @@ $("#content").toggleClass("col-md-12 col-md-9");
                         "<\/strong>" + item['tags'][0]['name'] + "<br>" +
                         "<strong>" + "Description: " +
                         "<\/strong>" + item['summary'] + "<br>" + "<strong>" + "Geology: " +
-                        "<\/strong>" + item['tags'][1]['name'],
+                        "<\/strong>" + item['tags'][1]['name'] + "<br>" +
+						"<button type='button' class='addCart btn btn-success' id="+item['id']+"><i class='fa fa-cart-plus' aria-hidden='true'><\/i><\/button>",
             thumbnail: item['previewImage']['thumbnail']['uri']
         });
     };
@@ -160,10 +164,22 @@ $("#content").toggleClass("col-md-12 col-md-9");
     //Fit map to bounds
     map.fitBounds(photoLayer.getBounds());
     map.spin(false);
+	
+	
+	
 	});
   }
    addAllPhotos()     
-        
+    
+	window.cartVals = []
+	map.on('popupopen', function(e){
+		
+	 $('.addCart').on('click', function(f) {
+		 let obj = sbDataAll.find(o => o.id === f.target.id);
+		 cartVals.push(obj)
+		 console.log(cartVals)
+		})
+	})
     
     //Define photo search function
     function search() {
@@ -203,7 +219,8 @@ $("#content").toggleClass("col-md-12 col-md-9");
                 photos.push({
                     lat: parseFloat(item['spatial']['boundingBox']['minY']),
                     lng: parseFloat(item['spatial']['boundingBox']['minX']),
-                    url: item['previewImage']['original']['viewUrl'],
+                    //url: item['previewImage']['original']['viewUrl'],
+					url: item['previewImage']['thumbnail']['uri'],
                     caption: "<strong>" + "Name: " +
                                 "<\/strong>" + item['title'] + 
                                 "<br>" + "<strong>" +
@@ -212,8 +229,10 @@ $("#content").toggleClass("col-md-12 col-md-9");
                                 "<\/strong>" + item['tags'][0]['name'] + "<br>" +
                                 "<strong>" + "Description: " +
                                 "<\/strong>" + item['summary'] + "<br>" + "<strong>" + "Geology: " +
-                                "<\/strong>" + item['tags'][1]['name'],
+                                "<\/strong>" + item['tags'][1]['name'] + "<br>" +
+								"<button type='button' class='addCart btn btn-success' id='test'><i class='fa fa-cart-plus' aria-hidden='true'><\/i><\/button>",
                     thumbnail: item['previewImage']['thumbnail']['uri']
+					
                 });
             };
            
@@ -271,7 +290,12 @@ $("#content").toggleClass("col-md-12 col-md-9");
 					}, 20);
         }
     })
-    $(function() {
+	
+	 
+	
+	
+
+  /*  $(function() {
         $('.selectpicker').on('change', function() {
             if (resetval == false) {
 				map.spin(true)
@@ -291,7 +315,7 @@ $("#content").toggleClass("col-md-12 col-md-9");
 					
                 }
             });
-        })
+        })*/
 		
      //onclick reset button, reset photos and search bar
     $('#resetsearch').on('click', function(e) {
@@ -428,11 +452,13 @@ $("#content").toggleClass("col-md-12 col-md-9");
         }
     });
 
-    $(".toggle-sidebar").click(function (map) {
+    $(".toggle-sidebar").click(function () {
   
                 $("#sidebar").toggleClass("collapsed");
                 $("#content").toggleClass("col-md-12 col-md-9");
-                map.invalidateSize()
+				 setTimeout(function(){ map.invalidateSize()}, 300);
+                //map.invalidateSize(true)
+				//map.fitBounds(photoLayer.getBounds());
                 return false;
             });
     $('.collapse').collapse()

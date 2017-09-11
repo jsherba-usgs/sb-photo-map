@@ -6,7 +6,7 @@ idna==2.6
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
-pysb==1.5.1
+git+https://my.usgs.gov/stash/scm/sbe/pysb.git
 requests==2.18.4
 urllib3==1.22
 Werkzeug==0.12.2

@@ -23,11 +23,23 @@ html, body {
     margin-right: 0px;
     margin-left:  0px;
     }
+.leaflet-control-layers{
+	width:100%
+	}
 	
+.panel-body-inner{
+	width: 100%;
+	padding: 6px 10px 6px 6px;
+color: #333;
+box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+background: #fff;
+border-radius: 5px;
+}
 	#titlescript{
 	color: #525252;
-	margin-top: 5px;
+	margin-top: 10px;
     margin-bottom: 10px;
+	margin-left: 15px;
     font-family: 'Roboto', sans-serif;
     }
 	.aboutbutton{
@@ -40,7 +52,7 @@ html, body {
 	.container-fluid{
 	height:100%;
 	margin: 0;
-    padding: 0px 0px 125px 0px;
+    padding: 0px 0px 70px 0px;
 	}
 	#startdate{
 	padding-right:0px;
@@ -50,7 +62,7 @@ html, body {
 	
 	
 	#usgscolorband{
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 	padding-right: 0px;
 	overflow:hidden;
 	}
@@ -67,6 +79,9 @@ html, body {
     padding-left: 0px; 
 	
 	}
+	#usgsidentifier{
+		padding-left:7px
+	}
 /*	.learnmoretab{
 	position:absolute;
 	bottom:12px;
@@ -75,8 +90,13 @@ html, body {
 	}*/
 	.downloadButton{
 	position:absolute;
-	bottom:12px;
-	left: 25px;
+	top:110px;
+	left: 10px;
+	}
+	.aboutButton{
+	position:absolute;
+	top:12px;
+	right: 12px;
 	}
 	
 	#controldiv{
@@ -177,7 +197,10 @@ html, body {
 	}
 	.form-multiline .form-group {
 	margin-bottom: 10px;
-	margin-right: 16px;
+	
+	}
+	.bootstrap-select{
+		width:100%
 	}
 	.info h4 {
 			margin: 0 0 5px;
@@ -200,7 +223,7 @@ html, body {
 	
 	}
 	#searchform{
-    background-color: #f0f0f0;
+    background-color: #fff;
    }
    #usgsfootertext {
 	  padding: 20px;
@@ -210,7 +233,7 @@ html, body {
     padding-right:0px;
     padding-left:0px;
     height : 40px;
-    top: -125px;
+    top: -70px;
    
   }
   @media only screen and (max-width: 768px) {

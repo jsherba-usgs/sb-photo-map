@@ -20,6 +20,7 @@ sb = pysb.SbSession()
 
 @app.route('/')	
 def home():
+    
     #query parent item for dataset metadata
     project_item = sb.get_item(project_parent_id)
    
@@ -64,7 +65,8 @@ def home():
     
     date_min = min(dates)
     date_max = max(dates)
-    
+    print("test1")
+    print("test1")
     return render_template('index.html', regions=regions, geology=geology, date_min=date_min, date_max=date_max, title=title, user_instructions=user_instructions, about_photos=about_photos)
 
 @app.route('/allPhotos', methods=['POST'])
@@ -74,7 +76,7 @@ def allPhotos():
     'fields':['title, summary, files, previewImage, tags, spatial, dates'],
     'max': "500"
     })
-    
+    print("test2")
     return jsonify(items);
 
 @app.route('/searchPhotos', methods=['POST'])
