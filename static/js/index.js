@@ -265,12 +265,12 @@
 	})
 	function downloadAllPhotos(){
 		allPhotos = []
-		//for (i = 0; i < cartVals.length; i++) {
+		for (i = 0; i < cartVals.length; i++) {
 			//allPhotos.push(cartVals[i]['files'][0]['url'])
-			//allPhotos.push(cartVals[i]['previewImage']['original']['viewUrl'])
+			allPhotos.push(cartVals[i]['previewImage']['original']['viewUrl'])
 			
-		//}
-		allPhotos = ["https://www.sciencebase.gov/catalog/file/get/59a5ec99e4b0fd9b77cd0a58?f=__disk__76%2F63%2F61%2F766361d00be6897349abe4e56e78c0eeb0bea2a9"]
+		}
+		//allPhotos = ["https://www.sciencebase.gov/catalog/file/get/59a5ec99e4b0fd9b77cd0a58?f=__disk__76%2F63%2F61%2F766361d00be6897349abe4e56e78c0eeb0bea2a9"]
 		console.log(allPhotos)
 		if (allPhotos.length <= 100) {
                 downloadAllImages(allPhotos)
@@ -465,7 +465,7 @@
                     deferred.resolve(zip); // ignore this error: just logging
                     // deferred.reject(zip); // or we may fail the download
                 } else {
-                    var filename = imgLink.split('/').pop();
+                    var filename = "photo_"+toString(i)+".jpg"//imgLink.split('/').pop();
                     zip.file(filename, data, {
                         binary: true
                     });
