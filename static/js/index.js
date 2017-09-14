@@ -186,7 +186,13 @@
 		})
 	})
 	function checkCart(obj){
-		return cartVals.filter(function(e) e.id == obj.id).length > 0;
+		var cartFilter
+		cartFilter = cartVals.filter(function(e){
+			return e.id == obj.id
+		})
+		var cartLength
+		cartLength = cartFilter.length > 0;
+		return cartLength;
 	}
 	
 	function removeFromCart(f){
