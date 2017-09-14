@@ -148,7 +148,8 @@
                         "<strong>" + "Description: " +
                         "<\/strong>" + item['summary'] + "<br>" + "<strong>" + "Geology: " +
                         "<\/strong>" + item['tags'][1]['name'] + "<br>" +
-						"<button type='button' class='addCart btn btn-success' id="+item['id']+"><i class='fa fa-cart-plus' aria-hidden='true'><\/i><\/button>",
+						"<button type='button' class='addCart btn btn-success' id="+item['id']+"><i class='fa fa-cart-plus' aria-hidden='true'><\/i><\/button>" +
+						"<a href="+item['files'][0]['url']+" class='btn btn-info' role='button'><i class='fa fa-download' aria-hidden='true'><\/i></a>",
             thumbnail: item['previewImage']['thumbnail']['uri']
         });
     };
@@ -162,7 +163,7 @@
     photoLayer.add(photos).addTo(map);
 	
     //Fit map to bounds
-    map.fitBounds(photoLayer.getBounds());
+    map.fitBounds(photoLayer.getBounds(), {padding: [20,20]});
     map.spin(false);
 	
 	
@@ -175,12 +176,109 @@
 	map.on('popupopen', function(e){
 		
 	 $('.addCart').on('click', function(f) {
-		 let obj = sbDataAll.find(o => o.id === f.target.id);
-		 cartVals.push(obj)
-		 console.log(cartVals)
+		 var obj = sbDataAll.find(o => o.id === f.target.id);
+		 
+			 if (checkCart(obj)===false){
+				 cartVals.push(obj)
+				 addToCart(obj)
+				 updateCartLabel(cartVals)
+			 }
 		})
 	})
-    
+	function checkCart(obj){
+		return cartVals.filter(function(e) e.id == obj.id).length > 0;
+	}
+	
+	function removeFromCart(f){
+		cartVals = cartVals.filter(function(el) {
+			return el.id !== f.currentTarget.id;
+		});
+		$("."+f.currentTarget.id).remove();
+		updateCartLabel()
+	}
+	$('#emptyCart').on('click', function() {
+		removeAll()
+	})
+	function removeAll(){
+		$("#cartDropdown").empty();
+		cartVals = []
+	}
+	function updateCartLabel(){
+		var cartDiv = document.getElementById("cartLabel")
+		cartDiv.innerHTML = '<i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart ('+cartVals.length+')'
+	}
+	function addToCart(cartObject){
+		
+		var cartDiv = document.getElementById("cartDropdown")
+		var listItem = document.createElement("li");
+		listItem.className = cartObject['id']
+		var innerDiv = document.createElement("div");
+		innerDiv.className += "thumbnail"
+		innerDiv.className += " right-caption"
+		innerDiv.className += " span4"
+		var img = document.createElement("img");
+		img.src = cartObject['previewImage']['small']['uri'];
+		img.className += "span2"
+		img.className += " cartImg"
+		var captionDiv = document.createElement("div");
+		captionDiv.className="caption"
+		//var thumbLabel = document.createElement("h5");
+		//thumbLabel.innerHTML="Thumbnail label"
+		var description = document.createElement("p");
+		description.innerHTML="<strong>" + "Name: " +
+                        "<\/strong>" + cartObject['title'] + 
+                        "<br>" + "<strong>" +
+                "Date: " + "<\/strong>" +
+                 cartObject['dates'][0]['dateString'] + "<br>" + "<strong>" + "Region: " +
+                        "<\/strong>" + cartObject['tags'][0]['name'] + "<br>" +
+                        "<strong>" + "Description: " +
+                        "<\/strong>" + cartObject['summary'] + "<br>" + "<strong>" + "Geology: " +
+                        "<\/strong>" + cartObject['tags'][1]['name'] + "<br>" +
+						"<button type='button' class='removeCart btn btn-danger' id="+cartObject['id']+"><i class='fa fa-times' aria-hidden='true'><\/i><\/button>" +
+						//"<button type='button' class='downloadPhoto btn btn-primary' id="+cartObject['id']+" href="+cartObject['files'][0]['url']+"><i class='fa fa-download' aria-hidden='true'><\/i><\/button>"
+						"<a href="+cartObject['files'][0]['url']+" class='btn btn-info' role='button'><i class='fa fa-download' aria-hidden='true'><\/i></a>"
+		
+		cartDiv.appendChild(listItem)
+		listItem.appendChild(innerDiv)
+		innerDiv.appendChild(img)
+		innerDiv.appendChild(captionDiv)
+		//captionDiv.appendChild(thumbLabel)
+		captionDiv.appendChild(description)
+		
+		$('.removeCart').on('click', function(f) {
+			removeFromCart(f)
+		
+		})
+		//$('.downloadPhoto').on('click', function(f) {
+			//downloadPhoto(f)
+		
+		//})
+		
+	}
+	function downloadPhoto(f){
+		var obj = sbDataAll.find(o => o.id === f.target.id);
+		console.log(obj['files'])
+		console.log(obj['files'][0]['url'])
+	}
+	$('#downloadAll').on('click', function() {
+		downloadAllPhotos()
+	})
+	function downloadAllPhotos(){
+		allPhotos = []
+		//for (i = 0; i < cartVals.length; i++) {
+			//allPhotos.push(cartVals[i]['files'][0]['url'])
+			//allPhotos.push(cartVals[i]['previewImage']['original']['viewUrl'])
+			
+		//}
+		allPhotos = ["https://www.sciencebase.gov/catalog/file/get/59a5ec99e4b0fd9b77cd0a58?f=__disk__76%2F63%2F61%2F766361d00be6897349abe4e56e78c0eeb0bea2a9"]
+		console.log(allPhotos)
+		if (allPhotos.length <= 100) {
+                downloadAllImages(allPhotos)
+            } else {
+                alert("100 photo download limit exceeded")
+            
+            }
+	}
     //Define photo search function
     function search() {
 				
@@ -190,7 +288,7 @@
            var stringquery = $("#taginput").val()
            var geo = $('.selectpicker.geo option:selected').val();
            var reg = $('.selectpicker.region option:selected').val();  
-           console.log(stringquery)
+       
         	$.when(
                    
               $.ajax({
@@ -230,7 +328,8 @@
                                 "<strong>" + "Description: " +
                                 "<\/strong>" + item['summary'] + "<br>" + "<strong>" + "Geology: " +
                                 "<\/strong>" + item['tags'][1]['name'] + "<br>" +
-								"<button type='button' class='addCart btn btn-success' id='test'><i class='fa fa-cart-plus' aria-hidden='true'><\/i><\/button>",
+								"<button type='button' class='addCart btn btn-success' id="+item['id']+"><i class='fa fa-cart-plus' aria-hidden='true'><\/i><\/button>" +
+								"<a href="+item['files'][0]['url']+" class='btn btn-info' role='button'><i class='fa fa-download' aria-hidden='true'><\/i></a>",
                     thumbnail: item['previewImage']['thumbnail']['uri']
 					
                 });
@@ -247,7 +346,8 @@
             if (photos.length >= 1) {
 			    //Add new photos to cluster, add cluster to map
                 photoLayer.add(photos).addTo(map);
-                map.fitBounds(photoLayer.getBounds());
+				
+                map.fitBounds(photoLayer.getBounds(), {padding: [20,20]});
 				map.spin(false);
             } else {
 				//altert "no photos found" if filter returns no photos
@@ -349,8 +449,7 @@
             type: "blob"
         });
         // see FileSaver.js
-        saveAs(content, "LandCoverTrendsImages.zip");
-        map.spin(false);
+        saveAs(content, "sb_photos.zip");
     }
 
     function addToZip(zip, imgLink, i) {
@@ -376,7 +475,7 @@
             return deferred;
         }
      //Download photos onclick
-    $('.downloadphotos').on('click', function(e) {
+  /*  $('.downloadphotos').on('click', function(e) {
             map.spin(true);
             // Construct an empty list to fill with onscreen markers.
             var inBounds = [],
@@ -397,7 +496,7 @@
                 alert("100 photo download limit exceeded")
                 map.spin(false);
             }
-        })
+        })*/
      
      //Initialize date picker
     $('.picker').datepicker({

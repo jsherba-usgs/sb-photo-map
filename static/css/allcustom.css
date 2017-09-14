@@ -36,11 +36,15 @@ background: #fff;
 border-radius: 5px;
 }
 	#titlescript{
-	color: #525252;
-	margin-top: 10px;
-    margin-bottom: 10px;
-	margin-left: 15px;
-    font-family: 'Roboto', sans-serif;
+	color: white;
+	background-color:black;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	font-family: 'Roboto', sans-serif;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
     }
 	.aboutbutton{
     padding-left: 20px;
@@ -261,6 +265,8 @@ border-radius: 5px;
 #sidebar {
   /* for the animation */
   transition: margin 0.3s ease;
+  overflow: auto;
+  background-color: #f0f0f0;
 }
 
 .sidebar.collapsed {
@@ -297,4 +303,37 @@ border-radius: 5px;
 
 .bootstrap-select{
 	width:100%;
+}
+.cartElement{
+	background-color: white;
+	padding-bottom:10px;
+	padding-left:10px;
+	padding-top:10px;
+	margin-top:10px;
+	margin-bottom:10px
+}
+.cartImg{
+	width:150px
+}
+.thumbnails{
+	padding-left:0px;
+}
+.thumbnail.right-caption > img {
+    float: left;
+    margin-right: 9px;
+}
+
+.thumbnail.right-caption {
+    float: left;
+}
+
+.thumbnail.right-caption > .caption {
+    padding: 4px;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+background-color: #f0f0f0;	
+}
+.dropdown-menu{
+	right:0px;
+	left: unset;
 }

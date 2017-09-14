@@ -46,8 +46,184 @@
             <div class="container-fluid col-md-3 sidebar" id="sidebar">
                 
                     <h3 id="titlescript">{{title}}</h3>
+					
+
+				
+						<ul class="nav nav-tabs">
+							<li class="active">
+								<a  href="#1" data-toggle="tab"><i class="fa fa-search" aria-hidden="true"></i> Search</a>
+							</li>
+							<li><a href="#2" data-toggle="tab" id="cartLabel"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart (0)</a>
+							</li>
+							<li><a href="#3" data-toggle="tab"><i class="fa fa-map" aria-hidden="true"></i> Basemaps</a>
+							</li>
+							<li class="dropdown">
+								<a class="dropdown-toggle" data-toggle="dropdown" href="#">About
+								<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+								  <li>
+										   <a data-target="#myModal" data-toggle="modal">How to use
+										   viewer</a>
+									   </li>
+										 <li class="divider"></li>
+										 <li>
+										   <a data-target="#modalAboutPhotos" data-toggle="modal">About the collection</a>
+										   
+									   </li> 
+								</ul>
+							  </li>
+							<li><!--<a href="#3" data-toggle="tab">About <i class="fa fa-question-circle" aria-hidden="true"></i></a>-->
+					
+						   
+							<div class="modal fade" id="myModal" tabindex="-1">
+								<div class="modal-dialog" style="width: 1000px">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button class="close" data-dismiss="modal" type=
+											"button">×</button>
+
+											<h3 class="modal-title">How to use the viewer</h3>
+										</div>
+
+										<div class="modal-body">
+										
+							 
+										{{user_instructions|safe}}
+										
+										</div>
+
+										<div class="modal-footer">
+											<button class="btn btn-default" data-dismiss="modal" type=
+											"button">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							 <div class="modal fade" id="modalAboutPhotos" tabindex="-1">
+								<div class="modal-dialog" style="width: 1000px">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button class="close" data-dismiss="modal" type=
+											"button">×</button>
+
+											<h3 class="modal-title">About the collection</h3>
+										</div>
+
+										<div class="modal-body">
+										
+										{{about_photos|safe}}
+										</div>
+
+										<div class="modal-footer">
+											<button class="btn btn-default" data-dismiss="modal" type=
+											"button">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						
+							</li>
+						</ul>
+
+							<div class="tab-content ">
+							  <div class="tab-pane active" id="1">
+									 <div class="panel-body">
+									   <div class="panel-body-inner">
+										 
+											<!-- Search bar -->
+										<form class="form form-multiline text-left" id="searchform"
+										name="searchform">
+
+											<div class="form-group form-group-100 text-left">
+												
+												<div class="input-group">
+													<label for="seachbox">Search by keyword</label>
+													<input class="form-control" id="taginput" placeholder=
+													"" type="text">
+												  
+													</span>
+												</div>
+											</div>
+
+											<div class="form-group text-left">
+											   
+												<label for="seachbox">Select date range</label>
+												<div class="input-daterange input-group picker" id="datepicker">
+													
+													<input class="input-sm form-control" id="startdate" name=
+													"start" type="text" value="{{date_min}}"> <span class=
+													"input-group-addon" style=
+												"padding-top: 6px;
+										padding-right: 12px; padding-bottom: 6px;
+										padding-left: 12px;">to</span> <input class=
+													"input-sm form-control" id="enddate" name="end" type="text"
+													value="{{date_max}}">
+												</div>
+											</div>
+											 <div class="form-group text-left">
+											   
+
+												<div class="buttonwidth">
+												<label for="seachbox">Select a geologic feature</label>
+													<select class="selectpicker geo" name="selValue">
+													
+														<option value="all">
+															All geology
+														</option>
+															{% for geo in geology %}
+															<option value="{{ geo }}">
+															{{ geo }}
+															</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+											<div class="form-group text-left">
+											   
+
+												<div class="buttonwidth">
+													<label for="seachbox">Select a region</label>
+													<select class="selectpicker region" name="selValue">
+														<option value="all">
+															All regions
+														</option>
+															{% for region in regions %}
+															<option value="{{ region }}">
+															{{ region }}
+															</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+											<hr>
+											<div class="form-group searchbuttongroup">
+												<button class="btn btn-default" id="resetsearch" type="button">Reset</button>
+												<button class="btn btn-custom search" type="button">Search</button>
+											</div>
+										</form>
+									   </div>
+									  </div>
+								</div>
+								<div class="tab-pane" id="2">
+									<div class="panel-body">
+									   <button class="btn btn-default" id="emptyCart" type="button">Empty Cart</button>	
+									   <button class="btn btn-success" id="downloadAll" type="button">Download All</button>	
+									   <ul class="thumbnails" id = "cartDropdown">
+										 
+						
+										
+										</ul>
+									  </div>
+								</div>
+						<div class="tab-pane" id="3">
+							  <div class="panel-body" id="basemaps-panel">
+						
+						  </div>
+								</div>
+							</div>
+				 
                 
-               <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <!-- <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                  
                   <div class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingTwo">
@@ -61,7 +237,7 @@
                       <div class="panel-body">
 					   <div class="panel-body-inner">
 					     
-                            <!-- Search bar -->
+                           
                         <form class="form form-multiline text-left" id="searchform"
                         name="searchform">
 
@@ -146,7 +322,20 @@
                     </div>
                     <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
                       <div class="panel-body">
-                       testtest
+                       <ul class="thumbnails" id = "cartDropdown">
+						  <li>
+							<div class="thumbnail right-caption span4">
+							  <img class="span2" src="http://placehold.it/120x160" alt="">
+							  <div class="caption">
+								<h5>Thumbnail label </h5>
+								<p>Cras justo odio, dapibus ac facilisis in, egestas eget. Eget metus</p>
+								<p><a href="#" class="btn btn-primary">Action</a> <a href="#" class="btn">Action</a></p>
+							  </div>
+							</div>
+						  </li>
+		
+						
+						</ul>
                       </div>
                     </div>
                   </div>
@@ -164,7 +353,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div>-->
             </div>
             <div class="container-fluid col-md-9" id="content">
 				<div class="row" id="section1">
@@ -186,7 +375,7 @@
 							"glyphicon glyphicon-circle-arrow-down"></span> Download
 							photos</a>-->
 						</div>
-						<div id="event" class="hidden-xs btn-group aboutButton">
+						<!--<div id="event" class="hidden-xs btn-group aboutButton">
 							   <button class="btn btn-custom dropdown-toggle" data-toggle=
 								   "dropdown" type="button">About <span class="caret"></span></button>
 									 <ul class="dropdown-menu dropdown-menu-right" id="myScrollspy"
@@ -250,7 +439,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						
 					</div>
 				</div>      
