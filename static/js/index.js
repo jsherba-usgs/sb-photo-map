@@ -152,6 +152,8 @@
 						"<a href="+item['files'][0]['url']+" class='btn btn-info' role='button'><i class='fa fa-download' aria-hidden='true'><\/i></a>",
             thumbnail: item['previewImage']['thumbnail']['uri']
         });
+		
+			
     };
    
    
@@ -174,17 +176,23 @@
     
 	window.cartVals = []
 	map.on('popupopen', function(e){
+		$('.addCart').on('click', function(f) {
 		
-	 $('.addCart').on('click', function(f) {
+		 console.log(sbDataAll)
+		 console.log(f.target.id)
 		 var obj = sbDataAll.find(o => o.id === f.target.id);
-		 
+			console.log(obj)
 			 if (checkCart(obj)===false){
 				 cartVals.push(obj)
 				 addToCart(obj)
 				 updateCartLabel(cartVals)
+				 
 			 }
 		})
+	 
 	})
+
+		
 	function checkCart(obj){
 		var cartFilter
 		cartFilter = cartVals.filter(function(e){
@@ -208,6 +216,7 @@
 	function removeAll(){
 		$("#cartDropdown").empty();
 		cartVals = []
+		updateCartLabel()
 	}
 	function updateCartLabel(){
 		var cartDiv = document.getElementById("cartLabel")
@@ -217,7 +226,7 @@
 		
 		var cartDiv = document.getElementById("cartDropdown")
 		var listItem = document.createElement("li");
-		listItem.className = cartObject['id']
+		listItem.className = cartObject.id
 		var innerDiv = document.createElement("div");
 		innerDiv.className += "thumbnail"
 		innerDiv.className += " right-caption"

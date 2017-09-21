@@ -6,7 +6,9 @@ from datetime import datetime
 
 sb = pysb.SbSession()
 # Get a private item.  Need to log in first.
-sb.login('jsherba@usgs.gov', 'CamelliaBloom0601@')
+username = raw_input("Username:  ")
+sb.loginc(str(username))
+
 time.sleep(2)
 def listPhotos(photo_dir):
     # Define the directory we will work from. Obtain a list of files.
