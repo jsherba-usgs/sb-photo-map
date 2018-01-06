@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
 	margin-top: 0px;
+    background-color: #f0f0f0;
 	}
 	
 	.btn-custom {
@@ -37,7 +38,7 @@ border-radius: 5px;
 }
 	#titlescript{
 	color: white;
-	background-color:black;
+	background-color:DimGrey;
 	margin-top: 0px;
 	margin-bottom: 0px;
 	margin-left: 0px;
@@ -265,8 +266,10 @@ border-radius: 5px;
 #sidebar {
   /* for the animation */
   transition: margin 0.3s ease;
-  overflow: auto;
+  /*overflow: auto;*/
   background-color: #f0f0f0;
+  bottom: 100px;
+  padding-top: 100px;
 }
 
 .sidebar.collapsed {
@@ -293,7 +296,14 @@ border-radius: 5px;
 }
 .panel-body{
 	background-color: #f0f0f0;
+    height:100%;
 }
+.tab-content{
+    height: 100%;        
+}
+.tab-pane{
+     height: 100%;  
+        }
 .input-group{
 	width:100%;
 }
@@ -336,4 +346,17 @@ background-color: #f0f0f0;
 .dropdown-menu{
 	right:0px;
 	left: unset;
+}
+
+#cart-buttons{
+        margin-bottom: 1em;
+}
+
+
+#cart-items{
+        overflow: auto;
+        height: 100%;
+}
+#resultNumber{
+        margin-top:10px;
 }

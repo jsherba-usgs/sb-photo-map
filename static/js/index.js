@@ -1,6 +1,6 @@
  $(document).ready(function() {
-    $("#sidebar").toggleClass("collapsed");
-    $("#content").toggleClass("col-md-12 col-md-9");
+   // $("#sidebar").toggleClass("collapsed");
+   // $("#content").toggleClass("col-md-12 col-md-9");
   
   var sbData = 0
     //Set max bounds and define map
@@ -144,10 +144,10 @@
                         "<br>" + "<strong>" +
                 "Date: " + "<\/strong>" +
                  item['dates'][0]['dateString'] + "<br>" + "<strong>" + "Region: " +
-                        "<\/strong>" + item['tags'][0]['name'] + "<br>" +
+                        "<\/strong>" + item['tags'][1]['name'] + "<br>" +
                         "<strong>" + "Description: " +
                         "<\/strong>" + item['summary'] + "<br>" + "<strong>" + "Geology: " +
-                        "<\/strong>" + item['tags'][1]['name'] + "<br>" +
+                        "<\/strong>" + item['tags'][0]['name'] + "<br>" +
 						"<button type='button' class='addCart btn btn-success' id="+item['id']+"><i class='fa fa-cart-plus' aria-hidden='true'><\/i><\/button>" +
 						"<a href="+item['files'][0]['url']+" class='btn btn-info' role='button'><i class='fa fa-download' aria-hidden='true'><\/i></a>",
             thumbnail: item['previewImage']['thumbnail']['uri']
@@ -157,7 +157,7 @@
     };
    
    
-	
+	updateResultsBar(sbData.items.length)
 	
     allphotos = photos
     //Add photos to cluster, add cluster to map
@@ -176,11 +176,12 @@
     
 	window.cartVals = []
 	map.on('popupopen', function(e){
+     //       console.log(e)
 		$('.addCart').on('click', function(f) {
-		
-		 console.log(sbDataAll)
-		 console.log(f.target.id)
-		 var obj = sbDataAll.find(o => o.id === f.target.id);
+		console.log(f)
+		 //console.log(sbDataAll)
+		 console.log(f.currentTarget.id)
+		 var obj = sbDataAll.find(o => o.id === f.currentTarget.id);
 			console.log(obj)
 			 if (checkCart(obj)===false){
 				 cartVals.push(obj)
@@ -190,7 +191,7 @@
 			 }
 		})
 	 
-	})
+    })
 
 		
 	function checkCart(obj){
@@ -240,15 +241,19 @@
 		//var thumbLabel = document.createElement("h5");
 		//thumbLabel.innerHTML="Thumbnail label"
 		var description = document.createElement("p");
+        console.log(cartObject)
 		description.innerHTML="<strong>" + "Name: " +
                         "<\/strong>" + cartObject['title'] + 
                         "<br>" + "<strong>" +
                 "Date: " + "<\/strong>" +
                  cartObject['dates'][0]['dateString'] + "<br>" + "<strong>" + "Region: " +
-                        "<\/strong>" + cartObject['tags'][0]['name'] + "<br>" +
+                        "<\/strong>" + cartObject['tags'][1]['name'] + "<br>" +
                         "<strong>" + "Description: " +
                         "<\/strong>" + cartObject['summary'] + "<br>" + "<strong>" + "Geology: " +
-                        "<\/strong>" + cartObject['tags'][1]['name'] + "<br>" +
+                        "<\/strong>" + cartObject['tags'][0]['name'] + "<br>" +
+                        
+                        "<a href="+cartObject['link']['url'] + " target='_blank'"+ ">View on ScienceBase</a>"+ "<br>" +
+                        
 						"<button type='button' class='removeCart btn btn-danger' id="+cartObject['id']+"><i class='fa fa-times' aria-hidden='true'><\/i><\/button>" +
 						//"<button type='button' class='downloadPhoto btn btn-primary' id="+cartObject['id']+" href="+cartObject['files'][0]['url']+"><i class='fa fa-download' aria-hidden='true'><\/i><\/button>"
 						"<a href="+cartObject['files'][0]['url']+" class='btn btn-info' role='button'><i class='fa fa-download' aria-hidden='true'><\/i></a>"
@@ -270,23 +275,25 @@
 		//})
 		
 	}
-	function downloadPhoto(f){
-		var obj = sbDataAll.find(o => o.id === f.target.id);
-		console.log(obj['files'])
-		console.log(obj['files'][0]['url'])
-	}
+	//function downloadPhoto(f){
+	//	var obj = sbDataAll.find(o => o.id === f.target.id);
+	//	console.log(obj['files'])
+	//	console.log(obj['files'][0]['url'])
+//	}
 	$('#downloadAll').on('click', function() {
 		downloadAllPhotos()
 	})
+    
 	function downloadAllPhotos(){
 		allPhotos = []
 		for (i = 0; i < cartVals.length; i++) {
 			//allPhotos.push(cartVals[i]['files'][0]['url'])
-			allPhotos.push(cartVals[i]['previewImage']['original']['viewUrl'])
+          console.log(cartVals[i]['previewImage'])
+			allPhotos.push(cartVals[i]['previewImage']['original']['viewUri'])
 			
 		}
 		//allPhotos = ["https://www.sciencebase.gov/catalog/file/get/59a5ec99e4b0fd9b77cd0a58?f=__disk__76%2F63%2F61%2F766361d00be6897349abe4e56e78c0eeb0bea2a9"]
-		console.log(allPhotos)
+		
 		if (allPhotos.length <= 100) {
                 downloadAllImages(allPhotos)
             } else {
@@ -295,6 +302,17 @@
             }
 	}
     //Define photo search function
+    
+    function updateResultsBar(resultsNumber){
+       if (resultsNumber > 0){
+       $("#resultNumber").removeClass().addClass( "alert alert-success" );
+       }else{
+       $("#resultNumber").removeClass().addClass( "alert alert-danger" );        
+               }
+       console.log("test")
+       resultsNumber =resultsNumber.toString()
+        $("#resultNumber").text("There were "+ resultsNumber + " photos returned")
+     }
     function search() {
 				
             //Get search parameters
@@ -339,10 +357,10 @@
                                 "<br>" + "<strong>" +
                         "Date: " + "<\/strong>" +
                          item['dates'][0]['dateString'] + "<br>" + "<strong>" + "Region: " +
-                                "<\/strong>" + item['tags'][0]['name'] + "<br>" +
+                                "<\/strong>" + item['tags'][1]['name'] + "<br>" +
                                 "<strong>" + "Description: " +
                                 "<\/strong>" + item['summary'] + "<br>" + "<strong>" + "Geology: " +
-                                "<\/strong>" + item['tags'][1]['name'] + "<br>" +
+                                "<\/strong>" + item['tags'][0]['name'] + "<br>" +
 								"<button type='button' class='addCart btn btn-success' id="+item['id']+"><i class='fa fa-cart-plus' aria-hidden='true'><\/i><\/button>" +
 								"<a href="+item['files'][0]['url']+" class='btn btn-info' role='button'><i class='fa fa-download' aria-hidden='true'><\/i></a>",
                     thumbnail: item['previewImage']['thumbnail']['uri']
@@ -351,7 +369,7 @@
             };
            
            
-        	
+        	 updateResultsBar(sbData.items.length)
         	
             //allphotos = photos
             //Add photos to cluster, add cluster to map
@@ -366,7 +384,7 @@
 				map.spin(false);
             } else {
 				//altert "no photos found" if filter returns no photos
-                alert("No photos found")
+               // alert("No photos found")
 				map.spin(false);
             }
         	});
@@ -451,6 +469,8 @@
     
 	//Define photo download functions
     function downloadAllImages(imgLinks) {
+            
+     imgLinks=["https://landcovertrends.usgs.gov/landcovertrendsphotos/13/13_05_0012.jpg"]
         var zip = new JSZip();
         var deferreds = [];
         for (var i = 0; i < imgLinks.length; i++) {
@@ -469,6 +489,8 @@
 
     function addToZip(zip, imgLink, i) {
             var deferred = $.Deferred();
+            console.log(imgLink)
+            console.log(i)
             JSZipUtils.getBinaryContent(imgLink, function(err, data) {
                 if (err) {
                     alert(
@@ -480,7 +502,8 @@
                     deferred.resolve(zip); // ignore this error: just logging
                     // deferred.reject(zip); // or we may fail the download
                 } else {
-                    var filename = "photo_"+toString(i)+".jpg"//imgLink.split('/').pop();
+                    var filename = imgLink.split('/').pop();
+                    //var filename = "tetst.jpg"//imgLink.split('/').pop();
                     zip.file(filename, data, {
                         binary: true
                     });
@@ -489,29 +512,7 @@
             });
             return deferred;
         }
-     //Download photos onclick
-  /*  $('.downloadphotos').on('click', function(e) {
-            map.spin(true);
-            // Construct an empty list to fill with onscreen markers.
-            var inBounds = [],
-                // Get the map bounds - the top-left and bottom-right locations.
-                bounds = map.getBounds();
-            // For each marker, consider whether it is currently visible by comparing
-            // with the current map bounds.
-            photoLayer.eachLayer(function(marker) {
-                if (bounds.contains(marker.getLatLng())) {
-                    inBounds.push(marker.options.icon.options
-                        .url);
-                }
-            });
-            //Check if less than 100 photos in bounds 
-            if (inBounds.length <= 100) {
-                downloadAllImages(inBounds)
-            } else {
-                alert("100 photo download limit exceeded")
-                map.spin(false);
-            }
-        })*/
+
      
      //Initialize date picker
     $('.picker').datepicker({

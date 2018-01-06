@@ -3,7 +3,9 @@ import pysb
 import os, time
 from datetime import datetime
 from flask import Flask, url_for, render_template, jsonify, request, json
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 photo_parent_id = "59a5e8b9e4b0fd9b77cd0884"
 project_parent_id = "597e9378e4b0a38ca2774a30"
@@ -14,6 +16,7 @@ sb = pysb.SbSession()
 # Get a private item.  Need to log in first.
 
 
+sb.login()
 #username = raw_input("Username:  ")
 #sb.loginc(str(username))
 
@@ -23,7 +26,7 @@ def home():
     
     #query parent item for dataset metadata
     project_item = sb.get_item(project_parent_id)
-   
+    
     title = project_item['title']	
     
     user_instructions_item = sb.get_item(user_instructions_parent_id)
@@ -35,9 +38,10 @@ def home():
     #query all items to list dates, regions, geology
     all_items = sb.find_items({
     'parentId': photo_parent_id,
-    'fields': ['tags, dates']
+    'fields': ['tags, dates'],
+    'max': "500"
     })
-   
+    print(len(all_items['items']))
     regions = []
     geology = []
     dates = []
@@ -58,15 +62,14 @@ def home():
                 
         except KeyError:
             continue
-                
+      
     regions=sorted(list(set(regions)))
     geology=sorted(list(set(geology)))
     dates = list(set(dates))
     
     date_min = min(dates)
     date_max = max(dates)
-    print("test1")
-    print("test1")
+    
     return render_template('index.html', regions=regions, geology=geology, date_min=date_min, date_max=date_max, title=title, user_instructions=user_instructions, about_photos=about_photos)
 
 @app.route('/allPhotos', methods=['POST'])
@@ -76,7 +79,7 @@ def allPhotos():
     'fields':['title, summary, files, previewImage, tags, spatial, dates'],
     'max': "500"
     })
-    print("test2")
+   
     return jsonify(items);
 
 @app.route('/searchPhotos', methods=['POST'])
